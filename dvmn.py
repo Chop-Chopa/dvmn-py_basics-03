@@ -21,16 +21,16 @@ massage_sample = """Привет, %friend_name%! %my_name% приглашает 
 massage_sample = massage_sample.replace("%website%","https://dvmn.org/profession-ref-program/ignatev2283/WuKkp/")
 massage_sample = massage_sample.replace("%friend_name%","Данил")
 massage_sample = massage_sample.replace("%my_name%","Евгений Игнатьев")
-letter_yandex ="""From: ka1zeroi@yandex.ru
-To: evgeny.ignatjev2016@yandex.ru
+main_mail = "ka1zeroi@yandex.ru"
+letter_yandex ="""From: {main_mail}
+To: {main_mail}
 Subject: Приглашение!
 Content-Type: text/plain; charset="UTF-8";
 
-{0}""".format(massage_sample)
+{massage_sample}""".format(main_mail=main_mail, massage_sample=massage_sample)
 letter_yandex = letter_yandex.encode("UTF-8")
 server = smtplib.SMTP_SSL('smtp.yandex.ru', 465) 
 server.login(os.environ["LOGIN"] , os.environ["PASSWORD"])
-server.sendmail("ka1zeroi@yandex.ru" , "ka1zeroi@yandex.ru" ,letter_yandex)
+server.sendmail(main_mail , main_mail ,letter_yandex)
 server.quit()
-
 
